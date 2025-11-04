@@ -10,25 +10,38 @@ class FlightController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function validateRequest(Request $request)
+    {
+        return $request->validate([
+            'flight_number' => 'required|string|max:10|unique:flights,flight_number',
+            'departure_airport' => 'required|string|max:100',
+            'arrival_airport' => 'required|string|max:100',
+            'departure_time' => 'required|date',
+            'arrival_time' => 'required|date|after:departure_time',
+            'status' => 'required|string|in:schedule,delayed,cancelled,departed,arrived',
+        ]);
+    }
+
     public function index()
     {
-        //
+        $data = Flight::all();
+        return response()->json($data);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
-    }
+    public function create() {}
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        
+        static::validateRequest($request);
+        Flight::create($request->all());
+        return response()->json(['message' => 'Flight created successfully'], 201);
     }
 
     /**
@@ -52,7 +65,10 @@ class FlightController extends Controller
      */
     public function update(Request $request, Flight $flight)
     {
-        //
+        static::validateRequest($request);
+        Flight::findOrFail($flight->id);
+        Flight::where('id', $flight->id)->update($request->all());
+        return response()->json(['message' => 'Flight updated successfully'], 200);
     }
 
     /**
@@ -60,6 +76,8 @@ class FlightController extends Controller
      */
     public function destroy(Flight $flight)
     {
-        //
+        Flight::findOrFail($flight->id);
+        Flight::where('id', $flight->id)->delete();
+        return response()->json(['message' => 'Flight deleted successfully'], 200);
     }
 }

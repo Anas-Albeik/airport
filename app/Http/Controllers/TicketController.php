@@ -12,7 +12,8 @@ class TicketController extends Controller
      */
     public function index()
     {
-        //
+        $data = Ticket::all();
+        return response()->json($data);
     }
 
     /**
@@ -28,7 +29,15 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'passenger_name' => 'required|string|max:100',
+            'flight_id' => 'required|exists:flights,id',
+            'seat_number' => 'required|string|max:5',
+            'price' => 'required|numeric|min:0',
+            'booking_date' => 'required|date',
+        ]);
+        Ticket::create($request->all());
+        return response()->json(['message' => 'Ticket created successfully'], 201);
     }
 
     /**
@@ -52,7 +61,17 @@ class TicketController extends Controller
      */
     public function update(Request $request, Ticket $ticket)
     {
-        //
+        $request->validate([
+            'passenger_name' => 'sometimes|required|string|max:100',
+            'flight_id' => 'sometimes|required|exists:flights,id',
+            'seat_number' => 'sometimes|required|string|max:5',
+            'price' => 'sometimes|required|numeric|min:0',
+            'booking_date' => 'sometimes|required|date',
+        ]);
+        Ticket::findOrFail($ticket->id)
+            ->update($request->all());
+        return response()
+            ->json(['message' => 'Ticket updated successfully'], 200);
     }
 
     /**
@@ -60,6 +79,8 @@ class TicketController extends Controller
      */
     public function destroy(Ticket $ticket)
     {
-        //
+        Ticket::findOrFail($ticket->id);
+        Ticket::where('id', $ticket->id)->delete();
+        return response()->json(['message' => 'Ticket deleted successfully'], 200);
     }
 }

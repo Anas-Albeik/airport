@@ -22,3 +22,16 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', [AuthController::class, 'user']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
+
+Route::prefix('flight')->group(function () {
+    Route::get('/', [App\Http\Controllers\FlightController::class, 'index']);
+    Route::get('/{id}', [App\Http\Controllers\FlightController::class, 'show']);
+    Route::put('/{id}', [App\Http\Controllers\FlightController::class, 'update']);
+    Route::delete('/{id}', [App\Http\Controllers\FlightController::class, 'destroy']);
+});
+Route::prefix('ticket')->group(function () {
+    Route::get('/', [App\Http\Controllers\TicketController::class, 'index']);
+    Route::post('/', [App\Http\Controllers\TicketController::class, 'store']);
+    Route::put('/{id}', [App\Http\Controllers\TicketController::class, 'update']);
+    Route::delete('/{id}', [App\Http\Controllers\TicketController::class, 'destroy']);
+});
