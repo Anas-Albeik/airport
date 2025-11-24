@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('loyalties', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('company_id')->constrained('companies')->onDelete('cascade');
-            
+            $table->integer('points')->default(0);
+            $table->enum('tier', ['Blue', 'Silver', 'Gold', 'Platinum'])->default('Blue');
+            $table->date('expires_at')->nullable();
             $table->timestamps();
         });
     }

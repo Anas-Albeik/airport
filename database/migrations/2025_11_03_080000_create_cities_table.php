@@ -13,12 +13,8 @@ return new class extends Migration
     {
         Schema::create('cities', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('postal_code');
-            $table->id();
-            $table->id();
-            $table->id();
-
+            $table->string('name')->unique();
+            $table->string('iso_code')->unique()->max(3);
             $table->timestamps();
         });
     }

@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('airport_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->string('description');
             $table->string('phone');
+            $table->string('logo_url')->nullable();
             $table->string('email')->unique();
             $table->timestamps();
         });

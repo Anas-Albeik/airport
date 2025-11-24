@@ -11,16 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('airplane', function (Blueprint $table) {
+        Schema::create('airplanes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('company_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->string('serial_number')->unique();
-            $table->string('number_of_seats');
-            $table->enum('status', ['active', 'deactivate', 'maintenance'])->default('active');
-            $table->id();
-            $table->id();
-
+            $table->integer('number_of_seats');
+            $table->enum('status', ['active', 'inactive', 'maintenance'])->default('active');
             $table->timestamps();
         });
     }
