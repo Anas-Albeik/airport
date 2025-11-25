@@ -15,9 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('postal_code');
-            $table->id();
-            $table->id();
-            $table->id();
 
             $table->timestamps();
         });

@@ -10,4 +10,8 @@ class Airport extends Model
     {
         return $this->hasMany(Company::class);
     }
+    public function flight()
+    {
+        return $this->hasMany(Flight::class);
+    }
 }

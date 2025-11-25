@@ -8,23 +8,23 @@ class Flight extends Model
 {
     public function airplane()
     {
-        return $this->belongsTo(Airplane::class);
+        return $this->hasOne(Airplane::class);
     }
     public function departureGate()
     {
-        return $this->belongsTo(Gates::class, 'departure_gate_id');
+        return $this->belongsTo(Gates::class);
     }
     public function arrivalGate()
     {
-        return $this->belongsTo(Gates::class, 'arrival_gate_id');
+        return $this->belongsTo(Gates::class);
     }
     public function departureAirport()
     {
-        return $this->belongsTo(Airport::class, 'departure_airport_id');
+        return $this->belongsTo(Airport::class);
     }
     public function arrivalAirport()
     {
-        return $this->belongsTo(Airport::class, 'arrival_airport_id');
+        return $this->belongsTo(Airport::class);
     }
     public function tickets()
     {

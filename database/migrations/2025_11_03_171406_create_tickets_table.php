@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('flight_id')->constrained('flights')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->enum('class', ['A', 'vip'])->default('Economy');
+            $table->enum('class', ['A', 'vip', 'Economy'])->default('Economy');
             $table->float('price');
             $table->enum('status', ['booked', 'canceled', 'checked-in'])->default('booked');
             

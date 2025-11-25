@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('gates', function (Blueprint $table) {
             $table->id();
             $table->string('gate_number')->unique();
-         
             $table->enum('status', ['available', 'occupied', 'maintenance'])->default('available');
             $table->timestamps();
         });
