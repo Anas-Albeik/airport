@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Flight;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 
 class FlightController extends Controller
@@ -25,6 +26,7 @@ class FlightController extends Controller
 
     public function index()
     {
+        $tickets = Flight::tickets()->user_id();
         $data = Flight::all();
         return response()->json($data);
     }

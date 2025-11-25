@@ -15,12 +15,14 @@ return new class extends Migration
             $table->id();
             $table->foreignId('airplane_id')->constrained('airplanes')->onDelete('cascade');
             $table->foreignId('city_id')->constrained('cities')->onDelete('cascade');
-            $table->foreignId('gate_id')->constrained('gates')->onDelete('cascade');
-            $table->enum('Scheduled', ['arrived', 'canceled', 'Delayed' , 'departed', 'On Time'])->default('On Time');
+            // $table->foreignId('gate_id')->constrained('gates')->onDelete('cascade');
+            $table->string('departure_gate');
+            $table->string('arrival_gate');
+            $table->enum('Scheduled', ['arrived', 'canceled', 'Delayed', 'departed', 'On Time'])->default('On Time');
             $table->string('arrival_airport');
             $table->string('arrival_time');
             $table->string('departure_time');
-            
+
             $table->timestamps();
         });
     }

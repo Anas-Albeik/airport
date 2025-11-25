@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ticket;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TicketController extends Controller
@@ -37,7 +38,7 @@ class TicketController extends Controller
             'booking_date' => 'required|date',
         ]);
         Ticket::create($request->all(),
-                        
+
 
 
     );
@@ -57,7 +58,7 @@ class TicketController extends Controller
      */
     public function edit(Ticket $ticket)
     {
-        //
+       
     }
 
     /**
