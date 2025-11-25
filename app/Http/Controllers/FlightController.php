@@ -14,11 +14,12 @@ class FlightController extends Controller
     {
         return $request->validate([
             'flight_number' => 'required|string|max:10|unique:flights,flight_number',
-            'departure_airport' => 'required|string|max:100',
+            'city_id'=>'required|string|max:10|country_exists:city_id',
             'arrival_airport' => 'required|string|max:100',
             'departure_time' => 'required|date',
             'arrival_time' => 'required|date|after:departure_time',
             'status' => 'required|string|in:schedule,delayed,cancelled,departed,arrived',
+            'gate_id'=>'required|string|max:5'
         ]);
     }
 
@@ -38,7 +39,7 @@ class FlightController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         static::validateRequest($request);
         Flight::create($request->all());
         return response()->json(['message' => 'Flight created successfully'], 201);
