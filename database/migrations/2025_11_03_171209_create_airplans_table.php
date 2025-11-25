@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('serial_number')->unique();
             $table->string('number_of_seats');
-            $table->enum('status', ['active', 'deactivate', 'maintenance'])->default('active');
+            $table->enum('status', ['available', 'deactivate', 'maintenance'])->default('active');
             $table->timestamps();
         });
     }

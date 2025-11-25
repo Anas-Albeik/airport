@@ -17,11 +17,11 @@ class Gates extends Model
     }
     public function departureFlights()
     {
-        return $this->self(Flight::class, 'departure_gate_id');
+        return $this->hasMany(Flight::class, 'departure_gate_id');
     }
     public function arrivalFlights()
     {
-        return $this->self(Flight::class, 'arrival_gate_id');
+        return $this->hasMany(Flight::class, 'arrival_gate_id');
 }
 
-]
+}
