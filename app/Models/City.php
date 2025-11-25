@@ -6,5 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class City extends Model
 {
-    //
+    public function airports()
+    {
+        return $this->hasMany(Airport::class);
+    }
+    public function flights()
+    {
+        return $this->hasMany(Flight::class);
+    }
 }

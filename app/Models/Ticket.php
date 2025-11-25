@@ -6,5 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ticket extends Model
 {
-    //
+    public function flight()
+    {
+        return $this->belongsTo(Flight::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }
