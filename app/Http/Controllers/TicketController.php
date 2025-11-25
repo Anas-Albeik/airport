@@ -36,7 +36,11 @@ class TicketController extends Controller
             'price' => 'required|numeric|min:0',
             'booking_date' => 'required|date',
         ]);
-        Ticket::create($request->all());
+        Ticket::create($request->all(),
+                        
+
+
+    );
         return response()->json(['message' => 'Ticket created successfully'], 201);
     }
 

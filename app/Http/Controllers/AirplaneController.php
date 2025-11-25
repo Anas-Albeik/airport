@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Airplan;
+use App\Models\Airplane;
 use Illuminate\Http\Request;
 
-class AirplanController extends Controller
+class AirplaneController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class AirplanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Airplan $airplan)
+    public function show(Airplane $airplane)
     {
         //
     }
@@ -42,7 +42,7 @@ class AirplanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Airplan $airplan)
+    public function edit(Airplane $airplane)
     {
         //
     }
@@ -50,7 +50,7 @@ class AirplanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Airplan $airplan)
+    public function update(Request $request, Airplane $airplane)
     {
         //
     }
@@ -58,7 +58,7 @@ class AirplanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Airplan $airplan)
+    public function destroy(Airplane $airplane)
     {
         //
     }
