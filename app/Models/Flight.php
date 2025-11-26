@@ -18,14 +18,6 @@ class Flight extends Model
     {
         return $this->belongsTo(Gates::class);
     }
-    public function departureAirport()
-    {
-        return $this->belongsTo(Airport::class);
-    }
-    public function arrivalAirport()
-    {
-        return $this->belongsTo(Airport::class);
-    }
     public function tickets()
     {
         return $this->hasMany(Ticket::class);
