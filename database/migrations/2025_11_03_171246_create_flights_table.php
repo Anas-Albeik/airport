@@ -14,15 +14,15 @@ return new class extends Migration
         Schema::create('flights', function (Blueprint $table) {
             $table->id();
             $table->foreignId('airplane_id')->constrained('airplanes')->onDelete('cascade');
-            $table->foreignId('city_id')->constrained('cities')->onDelete('cascade');
+            //$table->foreignId('city_id')->constrained('cities')->onDelete('cascade');
             $table->foreignId('departure_gate')->constrained('gates')->onDelete('cascade');        
             $table->foreignId('arrival_gate')->constrained('gates')->onDelete('cascade');
             $table->foreignId('departure_airport_id')->constrained('airports')->onDelete('cascade');        
             $table->foreignId('arrival_airport_id')->constrained('airports')->onDelete('cascade');
             $table->enum('Scheduled', ['arrived', 'canceled', 'Delayed', 'departed', 'On Time'])->default('On Time');
-            $table->string('arrival_airport');
-            $table->string('arrival_time');
-            $table->string('departure_time');
+            //$table->string('arrival_airport');
+            $table->timestamp('arrival_time');
+            $table->timestamp('departure_time');
             $table->timestamps();
         });
     }
