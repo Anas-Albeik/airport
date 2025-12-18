@@ -6,15 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Gates extends Model
 {
-    public function airport()
-    {
-        return $this->belongsTo(Airport::class);
-    }
-    public function flight()
-    {
-        return $this->hasMany(Flight::class);
-
-    }
     public function departureFlights()
     {
         return $this->hasMany(Flight::class, 'departure_gate_id');
@@ -23,5 +14,4 @@ class Gates extends Model
     {
         return $this->hasMany(Flight::class, 'arrival_gate_id');
 }
-
 }

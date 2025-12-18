@@ -18,8 +18,4 @@ class Ticket extends Model
     {
         return $this->hasOne(Review::class);
     }
-    public function users()
-    {
-        return $this->belongsTo(User::class);
-    }
 }

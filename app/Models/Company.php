@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Company extends Model
 {
-    public function airport()
+    public function airplanes()
     {
-        return $this->belongsTo(Airport::class);
+        return $this->hasMany(Airplane::class);
     }
 }
