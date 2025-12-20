@@ -5,18 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TicketController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+  public function index()
     {
-        $data = Ticket::all();
-        return response()->json($data);
+        $tickets = Ticket::where('user_id', Auth::id())
+            ->with('flight')
+            ->get();
+       
+        return response()->json([
+            'status' => 'success',
+            'data' => $tickets
+            
+        ]);
     }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -48,9 +55,19 @@ class TicketController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Ticket $ticket)
+   public function show($id)
     {
-        //
+        $ticket = Ticket::with(['flight', 'user', 'review'])->find($id);
+
+        if (!$ticket) {
+            return response()->json(['message' => 'التذكرة غير موجودة'], 404);
+        }
+
+        if ($ticket->user_id !== Auth::id()) {
+             return response()->json(['message' => 'غير مصرح لك برؤية '], 403);
+        }
+
+        return response()->json($ticket);
     }
 
     /**

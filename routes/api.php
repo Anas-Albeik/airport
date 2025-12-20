@@ -31,7 +31,6 @@ Route::prefix('flight')->group(function () {
 });
 Route::prefix('ticket')->group(function () {
     Route::get('/', [App\Http\Controllers\TicketController::class, 'index']);
-    Route::post('/', [App\Http\Controllers\TicketController::class, 'store']);
-    Route::put('/{id}', [App\Http\Controllers\TicketController::class, 'update']);
+    Route::post('/show/{id}', [App\Http\Controllers\TicketController::class, 'show']);
     Route::delete('/{id}', [App\Http\Controllers\TicketController::class, 'destroy']);
 });
