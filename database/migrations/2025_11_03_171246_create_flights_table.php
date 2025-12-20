@@ -21,8 +21,8 @@ return new class extends Migration
             $table->foreignId('arrival_airport_id')->constrained('airports')->onDelete('cascade');
             $table->enum('Scheduled', ['arrived', 'canceled', 'Delayed', 'departed', 'On Time'])->default('On Time');
             //$table->string('arrival_airport');
-            $table->timestamp('arrival_time');
-            $table->timestamp('departure_time');
+            $table->date('arrival_time');
+            $table->date('departure_time');
             $table->timestamps();
         });
     }
