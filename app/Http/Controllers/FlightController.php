@@ -30,12 +30,9 @@ class FlightController extends Controller
         })
         ->when($request->arrival_time, function ($query, $date_arr) {
             $query->whereDate('arrival_time', $date_arr);
-        })  
+        })
         ->paginate(10);
         return response()->json($flights, 200);
-
-
-
     }
 
     /**
