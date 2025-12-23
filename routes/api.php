@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FlightController;
+use App\Http\Controllers\TicketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,13 +26,13 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::prefix('flight')->group(function () {
-    Route::get('/', [App\Http\Controllers\FlightController::class, 'index']);
-    Route::get('/{id}', [App\Http\Controllers\FlightController::class, 'show']);
-    Route::put('/{id}', [App\Http\Controllers\FlightController::class, 'update']);
-    Route::delete('/{id}', [App\Http\Controllers\FlightController::class, 'destroy']);
+    Route::get('/', [FlightController::class, 'index']);
+    Route::get('/{id}', [FlightController::class, 'show']);
+    Route::put('/{id}', [FlightController::class, 'update']);
+    Route::delete('/{id}', [FlightController::class, 'destroy']);
 });
 Route::prefix('ticket')->group(function () {
-    Route::get('/', [App\Http\Controllers\TicketController::class, 'index']);
-    Route::post('/show/{id}', [App\Http\Controllers\TicketController::class, 'show']);
-    Route::delete('/{id}', [App\Http\Controllers\TicketController::class, 'destroy']);
+    Route::get('/', [TicketController::class, 'index']);
+    Route::post('/show/{id}', [TicketController::class, 'show']);
+    Route::delete('/{id}', [TicketController::class, 'destroy']);
 });
