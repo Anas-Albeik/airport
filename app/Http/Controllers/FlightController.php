@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\FlightRequest;
 use App\Models\Flight;
 use App\Models\Ticket;
+use Database\Factories\FlightFactory;
 use Illuminate\Http\Request;
 
 class FlightController extends Controller
@@ -14,14 +15,27 @@ class FlightController extends Controller
 
     public function index(FlightRequest $request)
     {
-        $flights=Flight::with('airplane','tickets')
-        ->where('departure_airport_id'==request('departure_airport_id'))
-        ->where('arrival_airport_id'==request('arrival_airport_id'))->get();
-        // ->whereHas('airplane')->where('seats','>=',request('seats'))
-        // ->whereDate('departure_time','==',request('departure_time'))
-        // ->whereDate('arrival_time','==',request('arrival_time'))
-        dd($request->all());
+        $flights = Flight::query()->with(['airplane', 'ticket'])
+
+        ->when($request->departure_airport_id, function ($query, $dep_id) {
+            $query->where('departure_airport_id', $dep_id);
+        })
+
+        ->when($request->arrival_airport_id, function ($query, $arr_id) {
+            $query->where('arrival_airport_id', $arr_id);
+        })
+
+        ->when($request->departure_time, function ($query, $date_dep) {
+            $query->whereDate('departure_time', $date_dep);
+        })
+        ->when($request->arrival_time, function ($query, $date_arr) {
+            $query->whereDate('arrival_time', $date_arr);
+        })  
+        ->paginate(10);
         return response()->json($flights, 200);
+
+
+
     }
 
     /**
@@ -32,14 +46,7 @@ class FlightController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-
-
-
-
-
-    }
+    public function store(Request $request) {}
 
     /**
      * Display the specified resource.

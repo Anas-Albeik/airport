@@ -21,6 +21,7 @@ class FlightRequest extends FormRequest
      */
     public function rules(): array
     {
+
          return [
         'flight_number'    => 'required|string|max:10|unique:flights,flight_number',
         'city_id'          => 'required|integer|exists:cities,id',
