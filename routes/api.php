@@ -15,11 +15,11 @@ use App\Http\Controllers\TicketController;
 |--------------------------------------------------------------------------
 */
 
-// 🧾 Public routes
+
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
-// 🔒 Protected routes (require token)
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', [AuthController::class, 'user']);
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -27,7 +27,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::prefix('flight')->group(function () {
     Route::get('/', [FlightController::class, 'index']);
-    Route::get('/{id}', [FlightController::class, 'show']);
+    Route::get('/show/{id}', [FlightController::class, 'show']);
     Route::put('/{id}', [FlightController::class, 'update']);
     Route::delete('/{id}', [FlightController::class, 'destroy']);
 });

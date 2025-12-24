@@ -13,9 +13,9 @@ class FlightController extends Controller
 
 
 
-    public function index(FlightRequest $request)
+    public function index(FlightRequest $request , Flight $flights)
     {
-        $flights = Flight::query()->with(['airplane', 'ticket'])
+        $flights->query()->with(['airplane', 'ticket'])
 
         ->when($request->departure_airport_id, function ($query, $dep_id) {
             $query->where('departure_airport_id', $dep_id);
@@ -48,9 +48,10 @@ class FlightController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Flight $flight)
+    public function show(Flight $flight,$id)
     {
-        //
+        $flight = Flight::with(['airplane', 'ticket'])->findOrFail($id);
+        return response()->json($flight, 200);
     }
 
     /**
