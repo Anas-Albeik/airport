@@ -17,11 +17,11 @@ class TicketController extends Controller
         $tickets = Ticket::where('user_id', Auth::id())
             ->with('flight')
             ->get();
-       
+       dd( $tickets);
         return response()->json([
             'status' => 'success',
             'data' => $tickets
-            
+
         ]);
     }
     /**
@@ -45,9 +45,6 @@ class TicketController extends Controller
             'booking_date' => 'required|date',
         ]);
         Ticket::create($request->all(),
-
-
-
     );
         return response()->json(['message' => 'Ticket created successfully'], 201);
     }
@@ -60,11 +57,11 @@ class TicketController extends Controller
         $ticket = Ticket::with(['flight', 'user', 'review'])->find($id);
 
         if (!$ticket) {
-            return response()->json(['message' => 'التذكرة غير موجودة'], 404);
+            return response()->json(['message' => 'NOT FOUNT'], 404);
         }
 
         if ($ticket->user_id !== Auth::id()) {
-             return response()->json(['message' => 'غير مصرح لك برؤية '], 403);
+             return response()->json(['message' => 'NOT ALLOWED'], 403);
         }
 
         return response()->json($ticket);
@@ -75,7 +72,7 @@ class TicketController extends Controller
      */
     public function edit(Ticket $ticket)
     {
-       
+
     }
 
     /**
