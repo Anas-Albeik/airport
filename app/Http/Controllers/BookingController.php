@@ -10,16 +10,16 @@ class BookingController extends Controller
 {
 
 
-    public function store(Request $request)
+    public static function store(Request $request)
 {
 
     $flight = Flight::findOrFail($request->flight_id);
 
 
 
-    if ($flight->isFull()) {
-        return back()->with('error', 'Sorry, this flight is already full!');
-    }
+    // if ($flight->isFull()) {
+    //     return back()->with('error', 'Sorry, this flight is already full!');
+    // }
 
     Booking::create([
         'user_id' => 1,
