@@ -25,10 +25,10 @@ class FlightController extends Controller
             $query->where('arrival_airport_id', $arr_id);
         })
 
-        ->when($request->departure_time, function ($query, $date_dep) {
+        ->when($request->departure_date, function ($query, $date_dep) {
             $query->whereDate('departure_time', $date_dep);
         })
-        ->when($request->arrival_time, function ($query, $date_arr) {
+        ->when($request->arrival_date, function ($query, $date_arr) {
             $query->whereDate('arrival_time', $date_arr);
         })
         ->paginate(10);
