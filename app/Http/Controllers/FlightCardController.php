@@ -33,7 +33,7 @@ class FlightCardController extends Controller
                 'flight_number' => $flight->airplane->company->name . ' ' . $flight->airplane->serial_number,
 
                 'type' => 'Local',
-                'status' => $flight->Scheduled, // On Time, Delayed...
+                'status' => $flight->status,
 
                 'origin' => $flight->departureAirport->city->name,
                 'destination' => $flight->arrivalAirport->city->name,
@@ -47,6 +47,7 @@ class FlightCardController extends Controller
                 'price' => $flight->ticket[0]->price ?? 150.00,
             ];
         });
+
 
         return response()->json([
             'status' => 'success',
@@ -91,9 +92,7 @@ class FlightCardController extends Controller
      */
     public function update(Request $request, Flight $flight)
     {
-        Flight::findOrFail($flight->id);
-        Flight::where('id', $flight->id)->update($request->all());
-        return response()->json(['message' => 'Flight updated successfully'], 200);
+        //
     }
 
     /**

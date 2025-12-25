@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('flights', function (Blueprint $table) {
             $table->id();
             $table->foreignId('airplane_id')->constrained('airplanes')->onDelete('cascade');
-
             $table->foreignId('departure_gate')->constrained('gates')->onDelete('cascade');
             $table->foreignId('arrival_gate')->constrained('gates')->onDelete('cascade');
             $table->foreignId('departure_airport_id')->constrained('airports')->onDelete('cascade');
@@ -23,6 +22,8 @@ return new class extends Migration
             $table->unsignedSmallInteger('total_capacity');
             $table->date('arrival_date');
             $table->date('departure_date');
+            $table->time('arrival_time');
+            $table->time('departure_time');
             $table->timestamps();
         });
     }

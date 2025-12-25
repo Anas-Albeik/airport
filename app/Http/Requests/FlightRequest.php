@@ -26,8 +26,10 @@ class FlightRequest extends FormRequest
         'flight_number'    => 'required|string|max:10|unique:flights,flight_number',
         'city_id'          => 'required|integer|exists:cities,id',
         'arrival_airport'  => 'required|string|max:100',
-        'departure_time'   => 'required|date',
-        'arrival_time'     => 'required|date|after:departure_time',
+        'departure_time'   => 'date',
+        'arrival_time'     => 'date|after:departure_date',
+        'departure_date'   => 'date',
+        'arrival_date'     => 'date|after:departure_date',
         'status'           => 'required|in:scheduled,delayed,cancelled,departed,arrived',
         'gate_id'          => 'required|integer|exists:gates,id',
     ];

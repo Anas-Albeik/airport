@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\FlightCardController;
 use App\Http\Controllers\FlightController;
 use App\Http\Controllers\TicketController;
 
@@ -33,10 +34,10 @@ Route::prefix('flight')->group(function () {
     Route::delete('/{id}', [FlightController::class, 'destroy']);
 });
 Route::prefix('flight/card')->group(function () {
-    Route::get('/', [FlightController::class, 'index']);
-    Route::get('/show/{id}', [FlightController::class, 'show']);
-    Route::put('/{id}', [FlightController::class, 'update']);
-    Route::delete('/{id}', [FlightController::class, 'destroy']);
+    Route::get('/', [FlightCardController::class, 'index']);
+    Route::get('/show/{id}', [FlightCardController::class, 'show']);
+    Route::put('/{id}', [FlightCardController::class, 'update']);
+    Route::delete('/{id}', [FlightCardController::class, 'destroy']);
 });
 Route::prefix('ticket')->group(function () {
     Route::get('/', [TicketController::class, 'index']);
