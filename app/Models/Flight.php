@@ -13,7 +13,7 @@ class Flight extends Model
     {
         return $this->belongsTo(Airplane::class);
     }
- public function departureGate()
+    public function departureGate()
     {
         return $this->belongsTo(Gates::class, 'departure_gate');
     }
@@ -33,4 +33,18 @@ class Flight extends Model
     {
         return $this->hasMany(Ticket::class, 'flight_id');
     }
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+    // public function isFull()
+    // {
+    //     $bookedCount = $this->bookings()->where('status', 'confirmed')->count();
+    //     return $bookedCount >= $this->total_capacity;
+    // }
+    // public function seatsRemaining()
+    // {
+    //     $bookedCount = $this->bookings()->where('status', 'confirmed')->count();
+    //     return $this->total_capacity - $bookedCount;
+    // }
 }

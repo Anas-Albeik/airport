@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\FlightController;
 use App\Http\Controllers\TicketController;
 
@@ -36,3 +37,4 @@ Route::prefix('ticket')->group(function () {
     Route::get('/show/{id}', [TicketController::class, 'show']);
     Route::delete('/{id}', [TicketController::class, 'destroy']);
 });
+Route::get('/bookings', [BookingController::class, 'store']);

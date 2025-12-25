@@ -8,6 +8,7 @@ use App\Models\Company;
 use App\Models\Airport;
 use App\Models\Gates;
 use App\Models\Airplane;
+use App\Models\Booking;
 use App\Models\Flight;
 use App\Models\Ticket;
 use App\Models\Review;
@@ -34,5 +35,6 @@ class DatabaseSeeder extends Seeder
         Ticket::factory(10)->create();
         Review::factory(10)->create();
         Loyalty::factory(10)->create();
+        Booking::factory(10)->create();
     }
 }
