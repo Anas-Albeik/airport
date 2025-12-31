@@ -13,7 +13,7 @@ class FlightController extends Controller
 
 
 
-    public function index(FlightRequest $request , Flight $flights)
+    public function index(Request $request , Flight $flights)
     {
         $flights->query()->with(['airplane', 'ticket'])
 
@@ -32,6 +32,7 @@ class FlightController extends Controller
             $query->whereDate('arrival_time', $date_arr);
         })
         ->paginate(10);
+        dd($flights);
         return response()->json($flights, 200);
     }
 
