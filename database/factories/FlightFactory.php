@@ -27,8 +27,8 @@ class FlightFactory extends Factory
             'arrival_airport_id' => \App\Models\Airport::factory(),
             'status' => fake()->randomElement(['arrived', 'canceled', 'Delayed', 'departed', 'On Time']),
             'total_capacity' => fake()->numberBetween(50, 100),
-            'arrival_time' => $arrivalTime,
-            'departure_time' => $departureTime,
+            'arrival_date' => $arrivalTime,
+            'departure_date' => $departureTime,
         ];
     }
 }

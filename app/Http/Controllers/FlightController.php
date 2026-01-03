@@ -13,27 +13,25 @@ class FlightController extends Controller
 
 
 
-    public function index(Request $request , Flight $flights)
+    public function index(Request $request, Flight $flights)
     {
-        $flights->query()->with(['airplane', 'ticket'])
 
-        ->when($request->departure_airport_id, function ($query, $dep_id) {
-            $query->where('departure_airport_id', $dep_id);
-        })
+        $tt =  $flights->query()->with(['airplane', 'ticket'])
 
-        ->when($request->arrival_airport_id, function ($query, $arr_id) {
-            $query->where('arrival_airport_id', $arr_id);
-        })
-
-        ->when($request->departure_date, function ($query, $date_dep) {
-            $query->whereDate('departure_time', $date_dep);
-        })
-        ->when($request->arrival_date, function ($query, $date_arr) {
-            $query->whereDate('arrival_time', $date_arr);
-        })
-        ->paginate(10);
-        dd($flights);
-        return response()->json($flights, 200);
+            ->when($request->departure_airport_id, function ($query, $dep_id) {
+                $query->where('departure_airport_id', $dep_id);
+            })
+            ->when($request->arrival_airport_id, function ($query, $arr_id) {
+                $query->where('arrival_airport_id', $arr_id);
+            })
+            ->when($request->departure_date, function ($query, $date_dep) {
+                $query->whereDate('departure_date', $date_dep);
+            })
+            ->when($request->arrival_date, function ($query, $date_arr) {
+                $query->whereDate('arrival_date', $date_arr);
+            })->paginate(10);
+        // dd($tt);
+        return response()->json($tt, 200);
     }
 
     /**
@@ -49,7 +47,7 @@ class FlightController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Flight $flight,$id)
+    public function show(Flight $flight, $id)
     {
         $flight = Flight::with(['airplane', 'ticket'])->findOrFail($id);
         return response()->json($flight, 200);

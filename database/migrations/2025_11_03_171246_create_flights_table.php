@@ -22,8 +22,8 @@ return new class extends Migration
             $table->unsignedSmallInteger('total_capacity');
             $table->date('arrival_date');
             $table->date('departure_date');
-            $table->time('arrival_time');
-            $table->time('departure_time');
+            $table->time('arrival_time')->nullable();
+            $table->time('departure_time')->nullable();
             $table->timestamps();
         });
     }
