@@ -17,7 +17,6 @@ class TicketController extends Controller
         $tickets = Ticket::where('user_id', Auth::id())
             ->with('flight')
             ->get();
-       dd( $tickets);
         return response()->json([
             'status' => 'success',
             'data' => $tickets
