@@ -16,8 +16,8 @@ class FlightController extends Controller
     public function index(Request $request, Flight $flights)
     {
 
-        $tt =  $flights->query()->with(['airplane', 'ticket'])
 
+        $data =  $flights->query()->with(['airplane', 'ticket'])
             ->when($request->departure_airport_id, function ($query, $dep_id) {
                 $query->where('departure_airport_id', $dep_id);
             })
@@ -30,8 +30,8 @@ class FlightController extends Controller
             ->when($request->arrival_date, function ($query, $date_arr) {
                 $query->whereDate('arrival_date', $date_arr);
             })->paginate(10);
-        // dd($tt);
-        return response()->json($tt, 200);
+
+        return response()->json($data, 200);
     }
 
     /**
@@ -64,20 +64,22 @@ class FlightController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Flight $flight)
+    public function update(Request $request,$id)
     {
-        Flight::findOrFail($flight->id);
-        Flight::where('id', $flight->id)->update($request->all());
+
+        $data=Flight::findOrFail($id)
+            ->update($request->all());
+            // dd($data);
         return response()->json(['message' => 'Flight updated successfully'], 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Flight $flight)
+    public function destroy(Flight $flight,$id)
     {
-        Flight::findOrFail($flight->id);
-        Flight::where('id', $flight->id)->delete();
+        Flight::findOrFail($id);
+        Flight::where('id', $id)->delete();
         return response()->json(['message' => 'Flight deleted successfully'], 200);
     }
 }

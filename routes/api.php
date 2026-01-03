@@ -30,8 +30,8 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::prefix('flight')->group(function () {
     Route::get('/', [FlightController::class, 'index']);
     Route::get('/show/{id}', [FlightController::class, 'show']);
-    Route::put('/{id}', [FlightController::class, 'update']);
-    Route::delete('/{id}', [FlightController::class, 'destroy']);
+    Route::put('/update/{id}', [FlightController::class, 'update']);
+    Route::delete('/delete/{id}', [FlightController::class, 'destroy']);
 });
 Route::prefix('flight/card')->group(function () {
     Route::get('/', [FlightCardController::class, 'index']);
