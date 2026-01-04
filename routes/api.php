@@ -32,13 +32,10 @@ Route::prefix('flight')->group(function () {
     Route::get('/show/{id}', [FlightController::class, 'show']);
     Route::put('/update/{id}', [FlightController::class, 'update']);
     Route::delete('/delete/{id}', [FlightController::class, 'destroy']);
+    Route::get('/card', [FlightCardController::class, 'index']);
 });
-Route::prefix('flight/card')->group(function () {
-    Route::get('/', [FlightCardController::class, 'index']);
-    Route::get('/show/{id}', [FlightCardController::class, 'show']);
-    Route::put('/{id}', [FlightCardController::class, 'update']);
-    Route::delete('/{id}', [FlightCardController::class, 'destroy']);
-});
+
+
 Route::prefix('ticket')->group(function () {
     Route::get('/', [TicketController::class, 'index']);
     Route::get('/show/{id}', [TicketController::class, 'show']);

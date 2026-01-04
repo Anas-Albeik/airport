@@ -76,7 +76,7 @@ class FlightCardController extends Controller
      */
     public function show(Flight $flight)
     {
-        //
+
     }
 
     /**
@@ -100,8 +100,6 @@ class FlightCardController extends Controller
      */
     public function destroy(Flight $flight)
     {
-        Flight::findOrFail($flight->id);
-        Flight::where('id', $flight->id)->delete();
-        return response()->json(['message' => 'Flight deleted successfully'], 200);
+        //
     }
 }

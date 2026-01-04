@@ -29,6 +29,8 @@ class FlightController extends Controller
             })
             ->when($request->arrival_date, function ($query, $date_arr) {
                 $query->whereDate('arrival_date', $date_arr);
+            })->when($request->seat_number, function ($query, $seats) {
+                $query->whereRaw('(total_capacity - (select count(*) from bookings where bookings.flight_id = flights.id and status = "confirmed")) >= ?', [$seats]);
             })->paginate(10);
 
         return response()->json($data, 200);
@@ -64,19 +66,18 @@ class FlightController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
 
-        $data=Flight::findOrFail($id)
+        $data = Flight::findOrFail($id)
             ->update($request->all());
-            // dd($data);
-        return response()->json(['message' => 'Flight updated successfully'], 200);
+        return response()->json($data, 200, ['message' => 'Flight updated successfully']);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Flight $flight,$id)
+    public function destroy(Flight $flight, $id)
     {
         Flight::findOrFail($id);
         Flight::where('id', $id)->delete();

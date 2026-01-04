@@ -17,6 +17,6 @@ class FlightStatusController extends Controller
                 $query->whereDate('departure_time', $date_dep);
             })
             ->paginate(10);
-            return response()->json($flights, 200);
+        return response()->json($flights, 200);
     }
 }

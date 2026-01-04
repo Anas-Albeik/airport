@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Flight extends Model
 {
@@ -38,14 +40,16 @@ class Flight extends Model
     {
         return $this->hasMany(Booking::class);
     }
-    // public function isFull()
-    // {
-    //     $bookedCount = $this->bookings()->where('status', 'confirmed')->count();
-    //     return $bookedCount >= $this->total_capacity;
-    // }
-    // public function seatsRemaining()
-    // {
-    //     $bookedCount = $this->bookings()->where('status', 'confirmed')->count();
-    //     return $this->total_capacity - $bookedCount;
-    // }
+    protected $appends = ['is_full', 'seats_remaining'];
+
+    public function getIsFullAttribute()
+    {
+
+        return ($this->bookings_count ?? 0) >= $this->total_capacity;
+    }
+
+    public function getSeatsRemainingAttribute()
+    {
+        return $this->total_capacity - ($this->bookings_count ?? 0);
+    }
 }
