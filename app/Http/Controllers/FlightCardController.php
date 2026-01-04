@@ -67,8 +67,7 @@ class FlightCardController extends Controller
     public function store(Request $request)
     {
 
-        BookingController::store($request);
-        return response()->json(['message' => 'Flight created successfully'], 201);
+        
     }
 
     /**
