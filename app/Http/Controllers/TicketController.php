@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ticket;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -36,7 +35,6 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
-
     }
 
     /**
@@ -70,7 +68,7 @@ class TicketController extends Controller
      */
     public function update(Request $request, Ticket $ticket)
     {
-        
+
     }
 
     /**
